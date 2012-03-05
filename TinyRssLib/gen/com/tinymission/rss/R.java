@@ -33,6 +33,7 @@ public final class R {
     public static final class style {
         public static int FeedItemDate=0x7f050003;
         public static int FeedItemDescription=0x7f050004;
+        public static int FeedItemImage=0x7f050005;
         public static int FeedItemTitle=0x7f050002;
         /**  Feed List 
          */

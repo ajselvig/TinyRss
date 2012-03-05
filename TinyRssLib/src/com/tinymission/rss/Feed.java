@@ -6,7 +6,6 @@ import android.util.Log;
 
 
 
-
 /** Encapsulation of a collection rss items.
  *
  */
@@ -24,6 +23,7 @@ public class Feed extends FeedEntity {
 	
 	private String _language;
 	
+	private ImageManager _imageManager = new ImageManager();
 	
 	/**
 	 * @return The title of the feed
@@ -134,6 +134,21 @@ public class Feed extends FeedEntity {
 	 */
 	public void setLanguage(String language) {
 		this._language = language;
+	}
+
+	
+	/**
+	 * @return The feed's image manager
+	 */
+	public ImageManager getImageManager() {
+		return _imageManager;
+	}
+
+	/**
+	 * @param The feed's image manager
+	 */
+	public void setImageManager(ImageManager imageManager) {
+		this._imageManager = imageManager;
 	}
 	
 	

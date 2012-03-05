@@ -8,6 +8,17 @@ It seems like the standard Java library for RSS/Atom is "Rome":http://rometools.
 
 Because there's already a de facto standard implementation for regular Java projects, I decided to focus TinyRss specifically on Android development. Therefore, it's an Android library project, not a regular jar. It's integrated tightly with Android API's and is specifically designed to show an RSS feed in an Android ListView (although you don't have to use this functionality).
 
+h2. Features
+
+* Fast SAX-based parser for RSS 2.0 feeds
+* Object-Oriented model to store feed and item data
+* Default ListView implementation for displaying feeds, including:
+** Title
+** Publication Date
+** Description
+** Image
+* Asynchronously download and cache item images
+
 h1. Integration
 
 The following instructions are for integrating TinyRss into an existing Android application. They assume you're using Eclipse with ADT. 
@@ -42,6 +53,9 @@ The following table shows the methods that can be overridden on a subclass of Fe
 | int | getItemLayoutId() | The resource id of the layout used to render each feed item | R.layout.feed_list_item |
 | boolean | isImageVisible() | Whether or not to display an image in each feed item | false |
 | boolean | isDateVisible() | Whether or not to display the item pub date under the title | false |
+| FeedImageSource | getImageSource() | Specifies where to get the image urls from the feed | FeedImageSource.Media |
+
+Note: Currently, feed images can only be pulled from the media:content tag by returning FeedImageSource.Media from getImageSource(). Other possible image sources will be added soon.
 
 h2. Resource Overrides
 
@@ -55,6 +69,7 @@ The following table shows the Android resources that be be overridden to control
 | @style/FeedItemTitle | Style for the TextView that renders the feed item title |
 | @style/FeedItemDate | Style for the TextView that renders the feed item date |
 | @style/FeedItemDescription | Style for the TextView that renders the feed item description |
+| @style/FeedItemImage | Style for the ImageView that renders the feed item image |
 | @drawable/feed_list_background | The background drawable for @layout/feed_list_item. By default, a vertical linear gradient |
 | @color/feed_bg_top | The top color of the default background gradient for @drawable/feed_list_background |
 | @color/feed_bg_bottom | The bottom color of the default background gradient for @drawable/feed_list_background |

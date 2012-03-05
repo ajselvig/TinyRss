@@ -54,6 +54,12 @@ public abstract class FeedActivity extends ListActivity {
 		return false;
 	}
 	
+	/** Subclasses can override to specify where to obtain the feed item images.
+	 * @return a value specifying the source of the feed item images (default Media)
+	 */
+	public FeedImageSource getImageSource() {
+		return FeedImageSource.Media;
+	}
 
 	private SimpleDateFormat _dateformat;
 	
@@ -216,13 +222,19 @@ public abstract class FeedActivity extends ListActivity {
 			
 			ImageView imageView = (ImageView)view.findViewById(R.id.feed_item_image);
 			if (imageView != null) {
-				if (isImageVisible()) {
-					//imageView.setLayoutParams(new LayoutParams(getIconWidth(), LayoutParams.WRAP_CONTENT));
+				FeedImageSource imageSource = getImageSource();
+				if (isImageVisible() && imageSource != FeedImageSource.None) {
 					imageView.setVisibility(View.VISIBLE);
-					MediaContent mc = item.getMediaContent();
-					if (mc != null) {
-						Log.v("Feed Adapter", "trying to use image url: " + mc.getUrl());
-						imageView.setImageURI(Uri.parse(mc.getUrl()));
+					switch (imageSource) {
+					case Media:
+						MediaContent mc = item.getMediaContent();
+						imageView.setImageBitmap(null);
+						if (mc != null) {
+							_feed.getImageManager().download(mc.getUrl(), imageView);
+						}
+						break;
+					default:
+						Log.w(getClass().getName(), "Don't know how to get an image from source type: " + imageSource.toString());
 					}
 				}
 				else {

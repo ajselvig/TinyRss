@@ -6,9 +6,7 @@
     android:padding="8dp" >
     
     <ImageView android:id="@+id/feed_item_image"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
+    	style="@style/FeedItemImage"
         />
 
     <TextView android:id="@+id/feed_item_title"

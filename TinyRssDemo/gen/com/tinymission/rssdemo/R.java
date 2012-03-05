@@ -46,13 +46,14 @@ public final class R {
     public static final class style {
         public static final int FeedItemDate=0x7f050003;
         public static final int FeedItemDescription=0x7f050004;
+        public static final int FeedItemImage=0x7f050005;
         public static final int FeedItemTitle=0x7f050002;
         /**  Feed List 
          */
         public static final int FeedList=0x7f050000;
         public static final int FeedListItem=0x7f050001;
-        public static final int HomeButton=0x7f050006;
-        public static final int HomeLabel=0x7f050007;
-        public static final int TinyTheme=0x7f050005;
+        public static final int HomeButton=0x7f050007;
+        public static final int HomeLabel=0x7f050008;
+        public static final int TinyTheme=0x7f050006;
     }
 }
