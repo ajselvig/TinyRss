@@ -1,0 +1,37 @@
+h1. Overview
+
+TinyRss is an Android library for working with RSS feeds. It contains a fast parser and customizable ListView output.
+
+h2. Why?
+
+It seems like the standard Java library for RSS/Atom is "Rome":http://rometools.org/, which apparently doesn't work on Android (there's an incomplete port I guess). Besides Rome, there are plenty of resources online for implementing your own parser. I decided to do just that, but package it as a customizable and reusable library. 
+
+Because there's already a de facto standard implementation for regular Java projects, I decided to focus TinyRss specifically on Android development. Therefore, it's an Android library project, not a regular jar. It's integrated tightly with Android API's and is specifically designed to show an RSS feed in an Android ListView (although you don't have to use this functionality).
+
+h1. Integration
+
+The following instructions are for integrating TinyRss into an existing Android application. They assume you're using Eclipse with ADT. 
+
+# Clone TinyRss to your machine
+# Import the TinyRssLib project into your Eclipse workspace
+# Add TinyRssLib as a reference in your project's Properties -> Android -> Library section
+# Create a new class in your project that extends com.tinymission.rss.FeedActivity
+# Make sure to add your new activity to your manifest file
+# FeedActivity is an abstract class that has one abstract method, getFeedUrl, which you must override to specify the url of the feed to parse:
+<pre>
+	<code>
+		public class SimpleActivity extends FeedActivity {
+			@Override
+			public String getFeedUrl() {
+				return "[feed url]";
+			}
+		}
+	</code>
+</pre>
+
+That's it! You now have a simple activity that will present a ListView with the contents of the specified feed.
+
+h1. License
+
+TinyRss is licensed under a 3-clause BSD license. See "LICENSE":https://github.com/ajselvig/TinyRss/blob/master/LICENSE.
+
