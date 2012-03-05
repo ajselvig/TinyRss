@@ -1,0 +1,203 @@
+package com.tinymission.rss;
+
+import java.util.Date;
+
+import org.jsoup.Jsoup;
+
+import android.util.Log;
+
+
+
+/** Encapsulates one RSS item.
+ * 
+ */
+public class Item extends FeedEntity {
+	
+	public Item() {
+		
+	}
+	
+	private String _title;
+	
+	private String _link;
+	
+	private String _description;
+	
+	private Date _pubDate;
+
+	private String _guid;
+	
+	private String _author;
+	
+	private String _comments;
+	
+	private String _source;
+	
+	private MediaContent _mediaContent;
+	
+	/**
+	 * @return The title of the item
+	 */
+	public String getTitle() {
+		return _title;
+	}
+
+	/**
+	 * @param The title of the item to set
+	 */
+	public void setTitle(String title) {
+		this._title = title;
+	}
+
+
+	/**
+	 * @return The URL of the item
+	 */
+	public String getLink() {
+		return _link;
+	}
+
+	/**
+	 * @param The URL of the item to set
+	 */
+	public void setLink(String link) {
+		this._link = link;
+	}
+
+
+	/**
+	 * @return The item synopsis
+	 */
+	public String getDescription() {
+		return _description;
+	}
+	
+	/**
+	 * @return the description without any html tags.
+	 */
+	public String getCleanDescription() {
+		return Jsoup.parse(_description).text();
+	}
+
+	/**
+	 * @param The item synopsis to set
+	 */
+	public void setDescription(String description) {
+		this._description = description;
+	}
+
+
+	/**
+	 * @return Indicates when the item was published
+	 */
+	public Date getPubDate() {
+		return _pubDate;
+	}
+
+	/**
+	 * @param Indicates when the item was published
+	 */
+	public void setPubDate(Date pubDate) {
+		this._pubDate = pubDate;
+	}
+
+	/**
+	 * @param Indicates when the item was published
+	 */
+	public void setPubDate(String pubDate) {
+		try {
+			this._pubDate = new Date(pubDate);
+		} catch (Exception ex) {
+			Log.w("rss.Item", "Unable to parse date string: " + pubDate);
+		}
+	}
+
+
+	/**
+	 * @return the _guid
+	 */
+	public String getGuid() {
+		return _guid;
+	}
+
+	/**
+	 * @param _guid the _guid to set
+	 */
+	public void setGuid(String guid) {
+		this._guid = guid;
+	}
+
+
+	/**
+	 * @return Email address of the author of the item
+	 */
+	public String getAuthor() {
+		return _author;
+	}
+
+	/**
+	 * @param Email address of the author of the item to set
+	 */
+	public void setAuthor(String author) {
+		this._author = author;
+	}
+
+
+	/**
+	 * @return URL of a page for comments relating to the item
+	 */
+	public String getComments() {
+		return _comments;
+	}
+
+	/**
+	 * @param URL of a page for comments relating to the item to set
+	 */
+	public void setComments(String comments) {
+		this._comments = comments;
+	}
+	
+
+	/**
+	 * @return The RSS channel that the item came from
+	 */
+	public String getSource() {
+		return _source;
+	}
+
+	/**
+	 * @param The RSS channel that the item came from to set
+	 */
+	public void setSource(String source) {
+		this._source = source;
+	}
+
+	/**
+	 * @return the media content for this item
+	 */
+	public MediaContent getMediaContent() {
+		return _mediaContent;
+	}
+	
+	/**
+	 * @param mc the media content for this item
+	 */
+	public void setMediaContent(MediaContent mc) {
+		_mediaContent = mc;
+	}
+	
+	
+//	private ArrayList<Enclosure> _enclosures;
+//	
+//	public class Enclosure {
+//		
+//	}
+//	
+//	private ArrayList<Category> _categories;
+//	
+//	public class Category {
+//		
+//	}
+	
+	
+}

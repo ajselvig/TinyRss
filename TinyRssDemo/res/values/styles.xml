@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TinyTheme" parent="android:Theme.Light.NoTitleBar">
+	    <item name="android:windowBackground">@drawable/whitey</item>
+	</style>
+    <style name="HomeButton" parent="@android:style/Widget">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/home_button_background</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:shadowColor">#000</item>
+        <item name="android:shadowDx">2.0</item>
+        <item name="android:shadowDy">2.0</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+    <style name="HomeLabel" parent="@android:style/Widget">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#638EBD</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:layout_margin">20dp</item>
+        <item name="android:shadowColor">#000</item>
+        <item name="android:shadowDx">2.0</item>
+        <item name="android:shadowDy">2.0</item>
+        <item name="android:shadowRadius">2</item>
+    </style>
+</resources>

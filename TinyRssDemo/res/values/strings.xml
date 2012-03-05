@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">TinyRss Demo Application</string>
+    <string name="app_name">TinyRss Demo</string>
+    <string name="simple_demo">Simple Demo</string>
+    <string name="advanced_demo">Advanced Demo</string>
+
+</resources>

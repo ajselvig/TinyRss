@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="feed_bg_top">#EAEAEA</color>
+    <color name="feed_bg_bottom">#FFFFFF</color>
+    <color name="feed_text">#565656</color>
+</resources>

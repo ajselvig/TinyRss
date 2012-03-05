@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/feed_list_background"
+    android:padding="8dp" >
+    
+    <ImageView android:id="@+id/feed_item_image"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        />
+
+    <TextView android:id="@+id/feed_item_title"
+        android:layout_toRightOf="@id/feed_item_image"
+        style="@style/FeedItemTitle"/>
+
+    <TextView android:id="@+id/feed_item_pubDate"
+        android:layout_below="@id/feed_item_title"
+        android:layout_toRightOf="@id/feed_item_image"
+        style="@style/FeedItemDate"
+        android:visibility="gone"/>
+    
+    <TextView android:id="@+id/feed_item_description"
+        android:layout_below="@id/feed_item_pubDate"
+        android:layout_toRightOf="@id/feed_item_image"
+        style="@style/FeedItemDescription"/>
+
+</RelativeLayout>

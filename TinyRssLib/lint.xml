@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="ContentDescription">
+        <ignore path="res/layout/feed_list_item.xml" />
+        <ignore path="res/layout/icon_list_item.xml" />
+        <ignore path="res/layout/toolbar.xml" />
+    </issue>
+</lint>
