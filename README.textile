@@ -18,18 +18,47 @@ The following instructions are for integrating TinyRss into an existing Android 
 # Create a new class in your project that extends com.tinymission.rss.FeedActivity
 # Make sure to add your new activity to your manifest file
 # FeedActivity is an abstract class that has one abstract method, getFeedUrl, which you must override to specify the url of the feed to parse:
-<pre>
-	<code>
-		public class SimpleActivity extends FeedActivity {
-			@Override
-			public String getFeedUrl() {
-				return "[feed url]";
-			}
-		}
-	</code>
+<pre lang="java">
+public class MyActivity extends FeedActivity {
+	@Override
+	public String getFeedUrl() {
+		return "[feed url]";
+	}
+}
 </pre>
 
-That's it! You now have a simple activity that will present a ListView with the contents of the specified feed.
+That's it! You now have a simple activity that will present a ListView with the contents of the specified feed. See the next section for information about customizing the ListView.
+
+h1. Customization
+
+The feed ListView can be customized by overriding methods on the FeedActivity class and by changing the Android resources that are sued to compose the view.
+
+h2. FeedActivity Overrides
+
+The following table shows the methods that can be overridden on a subclass of FeedActivity to control its behavior.
+
+|_. Type |_. Name |_. Description |_. Default |
+| int | getListLayoutId() | The resource id of the layout used as the content view for the activity (*must* contain a ListView with id @android:id/list) | R.layout.feed |
+| int | getItemLayoutId() | The resource id of the layout used to render each feed item | R.layout.feed_list_item |
+| boolean | isImageVisible() | Whether or not to display an image in each feed item | false |
+| boolean | isDateVisible() | Whether or not to display the item pub date under the title | false |
+
+h2. Resource Overrides
+
+The following table shows the Android resources that be be overridden to control the appearance and layout of the feed ListView.
+
+|_. Name |_. Description |
+| @layout/feed | The content layout for feed activity (*must* contain a ListView with id @android:id/list) |
+| @layout/feed_list_item | The layout used to render each feed item |
+| @style/FeedList | Style for the ListView in R.layout.feed |
+| @style/FeedListItem | Style for the default ListView item |
+| @style/FeedItemTitle | Style for the TextView that renders the feed item title |
+| @style/FeedItemDate | Style for the TextView that renders the feed item date |
+| @style/FeedItemDescription | Style for the TextView that renders the feed item description |
+| @drawable/feed_list_background | The background drawable for @layout/feed_list_item. By default, a vertical linear gradient |
+| @color/feed_bg_top | The top color of the default background gradient for @drawable/feed_list_background |
+| @color/feed_bg_bottom | The bottom color of the default background gradient for @drawable/feed_list_background |
+| @color/feed_text | The default text color for all TextViews in @layout/feed_list_item |
 
 h1. License
 
