@@ -28,9 +28,7 @@ The following instructions are for integrating TinyRss into an existing Android 
 # Add TinyRssLib as a reference in your project's Properties -> Android -> Library section
 # Create a new class in your project that extends com.tinymission.rss.FeedActivity
 # Make sure to add your new activity to your manifest file
-# Make sure your manifest file specifies the internet permission:
-<pre lang="xml">
-<uses-permission android:name="android.permission.INTERNET" />
+# Make sure your manifest file specifies the internet permission: &lt;uses-permission android:name="android.permission.INTERNET" &gt;
 </pre>
 # Go to Properties -> Java Build Path -> Libraries and click Add JARs..., then select jsoup-1.6.1.jar from the TinyRssLib/lib directory
 # FeedActivity is an abstract class that has one abstract method, getFeedUrl, which you must override to specify the url of the feed to parse:
@@ -59,7 +57,7 @@ The following table shows the methods that can be overridden on a subclass of Fe
 | boolean | isImageVisible() | Whether or not to display an image in each feed item | false |
 | boolean | isDateVisible() | Whether or not to display the item pub date under the title | false |
 | FeedImageSource | getImageSource() | Specifies where to get the image urls from the feed | FeedImageSource.MediaContent |
-| int | getMaxItems | Specifies the number of items to show in the feed, or a negative value to show all items | -1 |
+| int | getMaxItems() | Specifies the number of items to show in the feed, or a negative value to show all items | -1 |
 
 Note: Currently, feed images can only be pulled from the media:content or media:thumbnail tags by returning FeedImageSource.MediaContent or FeedImageSource.MediaThumbnail from getImageSource(). Other possible image sources will be added soon.
 
