@@ -16,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /** Base class for activities that show an RSS feed.
  *
@@ -38,6 +39,13 @@ public abstract class FeedActivity extends ListActivity {
 		return R.layout.feed_list_item;
 	}
 	
+	/**
+	 * @return the maximum number of items to render, or less than 0 for all items (default)
+	 */
+	public int getMaxItems() {
+		return -1;
+	}
+	
 	/** Subclasses can override this to show an image next to the feed text.
 	 * 
 	 * @return true if an image should be shown next to the feed text (default false)
@@ -58,7 +66,7 @@ public abstract class FeedActivity extends ListActivity {
 	 * @return a value specifying the source of the feed item images (default Media)
 	 */
 	public FeedImageSource getImageSource() {
-		return FeedImageSource.Media;
+		return FeedImageSource.MediaContent;
 	}
 
 	private SimpleDateFormat _dateformat;
@@ -147,11 +155,13 @@ public abstract class FeedActivity extends ListActivity {
 		@Override
 		protected void onPostExecute(Integer result) {
 			super.onPostExecute(result);
+			cancelProgressDialog();
 			if (_feed != null)
 				setListAdapter(new FeedAdapter(_feed));
-			else
+			else {
 				Log.w("FeedFetcher", "Unable to fetch feed. See previous errors.");
-			cancelProgressDialog();
+				Toast.makeText(FeedActivity.this, "There was an error getting the feed. Please try again later.", Toast.LENGTH_LONG).show();
+			}
 		}
 		
 	}
@@ -172,6 +182,8 @@ public abstract class FeedActivity extends ListActivity {
 		public int getCount() {
 			if (_feed == null)
 				return 0;
+			if (getMaxItems() > -1)
+				return getMaxItems();
 			return _feed.getItemCount();
 		}
 	
@@ -212,7 +224,7 @@ public abstract class FeedActivity extends ListActivity {
 			
 			TextView pubDateView = (TextView)view.findViewById(R.id.feed_item_pubDate);
 			if (pubDateView != null) {
-				if (isDateVisible()) {
+				if (isDateVisible() && item.getPubDate() != null) {
 					pubDateView.setVisibility(View.VISIBLE);
 					pubDateView.setText(_dateformat.format(item.getPubDate()));
 				}
@@ -226,11 +238,18 @@ public abstract class FeedActivity extends ListActivity {
 				if (isImageVisible() && imageSource != FeedImageSource.None) {
 					imageView.setVisibility(View.VISIBLE);
 					switch (imageSource) {
-					case Media:
+					case MediaContent:
 						MediaContent mc = item.getMediaContent();
 						imageView.setImageBitmap(null);
 						if (mc != null) {
 							_feed.getImageManager().download(mc.getUrl(), imageView);
+						}
+						break;
+					case MediaThumbnail:
+						MediaThumbnail mt = item.getMediaThumbnail();
+						imageView.setImageBitmap(null);
+						if (mt != null) {
+							_feed.getImageManager().download(mt.getUrl(), imageView);
 						}
 						break;
 					default:

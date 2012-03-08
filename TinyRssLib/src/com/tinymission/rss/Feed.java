@@ -2,6 +2,8 @@ package com.tinymission.rss;
 
 import java.util.*;
 
+import org.xml.sax.Attributes;
+
 import android.util.Log;
 
 
@@ -11,6 +13,14 @@ import android.util.Log;
  */
 public class Feed extends FeedEntity {
 	
+	public Feed(Attributes attributes) {
+		super(attributes);
+	}
+	
+	public Feed() {
+		super(null);
+	}
+
 	private String _title;
 	
 	private String _link;

@@ -3,6 +3,7 @@ package com.tinymission.rss;
 import java.util.Date;
 
 import org.jsoup.Jsoup;
+import org.xml.sax.Attributes;
 
 import android.util.Log;
 
@@ -13,27 +14,21 @@ import android.util.Log;
  */
 public class Item extends FeedEntity {
 	
-	public Item() {
-		
+	public Item(Attributes attributes) {
+		super(attributes);
 	}
 	
 	private String _title;
-	
 	private String _link;
-	
 	private String _description;
-	
 	private Date _pubDate;
-
 	private String _guid;
-	
 	private String _author;
-	
 	private String _comments;
-	
 	private String _source;
 	
 	private MediaContent _mediaContent;
+	private MediaThumbnail _mediaThumbnail;
 	
 	/**
 	 * @return The title of the item
@@ -172,6 +167,7 @@ public class Item extends FeedEntity {
 		this._source = source;
 	}
 
+	
 	/**
 	 * @return the media content for this item
 	 */
@@ -186,18 +182,20 @@ public class Item extends FeedEntity {
 		_mediaContent = mc;
 	}
 	
+
+	/**
+	 * @return the media thumbnail for this item
+	 */
+	public MediaThumbnail getMediaThumbnail() {
+		return _mediaThumbnail;
+	}
 	
-//	private ArrayList<Enclosure> _enclosures;
-//	
-//	public class Enclosure {
-//		
-//	}
-//	
-//	private ArrayList<Category> _categories;
-//	
-//	public class Category {
-//		
-//	}
+	/**
+	 * @param mc the media thumbnail for this item
+	 */
+	public void setMediaThumbnail(MediaThumbnail mt) {
+		_mediaThumbnail = mt;
+	}
 	
 	
 }

@@ -4,7 +4,8 @@ package com.tinymission.rss;
  */
 public enum FeedImageSource {
 	None,
-	Media
+	MediaContent,
+	MediaThumbnail
 };
 
 

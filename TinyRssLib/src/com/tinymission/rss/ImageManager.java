@@ -30,6 +30,7 @@ public class ImageManager {
 	
 	
 	public void download(String url, ImageView imageView) {
+		Log.v(LOG_TAG, "(" + imageView.hashCode() + ") Requested download: " + url);
 		// cancel any existing downloads
 		cancelDownloaderTask(imageView);
 		
@@ -40,28 +41,29 @@ public class ImageManager {
 		// download the image
 		DownloaderTask task = new DownloaderTask(imageView);
 		task.execute(url);
-		_tasks.put(imageView.getId(), task);
+		_tasks.put(imageView.hashCode(), task);
 	}
 	
 
 	private DownloaderTask getDownloaderTask(ImageView imageView) {
-		return _tasks.get(imageView.getId());
+		return _tasks.get(imageView.hashCode());
 	}
 	
 	
 	private void cancelDownloaderTask(ImageView imageView) {
-		if (_tasks.containsKey(imageView.getId())) {
-			DownloaderTask task = _tasks.get(imageView.getId());
+		if (_tasks.containsKey(imageView.hashCode())) {
+			DownloaderTask task = _tasks.get(imageView.hashCode());
+			Log.v(LOG_TAG, "(" + imageView.hashCode() + ") Cancelled download: " + task.url);
 			task.cancel(true);
 		}
 	}
 	
 	private void removeDownloaderTask(ImageView imageView) {
-		_tasks.remove(imageView.getId());
+		_tasks.remove(imageView.hashCode());
 	}
 	
 	private Bitmap downloadBitmap(String url) {
-
+		Log.v(LOG_TAG, "Began download: " + url);
         // AndroidHttpClient is not allowed to be used from the main thread
         final DefaultHttpClient client = new DefaultHttpClient();
         final HttpGet getRequest = new HttpGet(url);
@@ -70,8 +72,7 @@ public class ImageManager {
             HttpResponse response = client.execute(getRequest);
             final int statusCode = response.getStatusLine().getStatusCode();
             if (statusCode != HttpStatus.SC_OK) {
-                Log.w("ImageDownloader", "Error " + statusCode +
-                        " while retrieving bitmap from " + url);
+                Log.w(LOG_TAG, "Error " + statusCode + " while retrieving bitmap from " + url);
                 return null;
             }
 
@@ -99,8 +100,6 @@ public class ImageManager {
         } catch (Exception e) {
             getRequest.abort();
             Log.w(LOG_TAG, "Error while retrieving bitmap from " + url, e);
-        } finally {
-            
         }
         return null;
     }
@@ -140,7 +139,7 @@ public class ImageManager {
 	public boolean tryLoadCachedBitmap(String url, ImageView imageView) {
 		if (_bitmapCache.containsKey(url)) {
 			imageView.setImageBitmap(_bitmapCache.get(url));
-			Log.v(LOG_TAG, "Loaded cached bitmap for url: " + url);
+			Log.v(LOG_TAG, "(" + imageView.hashCode() + ") Loaded cached: " + url);
 			return true;
 		}
 		return false;
@@ -186,7 +185,7 @@ public class ImageManager {
                 if (this == bitmapDownloaderTask) {
                 	_imageView.setImageBitmap(bitmap);
                     removeDownloaderTask(_imageView);
-        			Log.v(LOG_TAG, "Downloaded bitmap for url: " + url);
+        			Log.v(LOG_TAG, "(" + _imageView.hashCode() + ") Completed download: " + url);
                 }
             }
         }

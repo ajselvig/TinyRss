@@ -2,6 +2,8 @@ package com.tinymission.rss;
 
 import java.lang.reflect.Method;
 
+import org.xml.sax.Attributes;
+
 import android.util.Log;
 
 
@@ -9,6 +11,17 @@ import android.util.Log;
  *
  */
 public class FeedEntity {
+	
+	
+	public FeedEntity(Attributes attributes) {
+		if (attributes != null) {
+			for (int i=0; i < attributes.getLength(); i++) {
+				String name = attributes.getLocalName(i);
+				String value = attributes.getValue(i);
+				setProperty(name, value);
+			}
+		}
+	}
 	
 	/** Sets the string value of a property by name.
 	 * 

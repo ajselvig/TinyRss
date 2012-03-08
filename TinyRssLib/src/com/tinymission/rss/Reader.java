@@ -34,7 +34,7 @@ public class Reader {
 	/** The tags that should be parsed into separate entities, not just properties of existing entities.
 	 * 
 	 */
-	public final static String[] ENTITY_TAGS = {"channel", "item", "media:content"};
+	public final static String[] ENTITY_TAGS = {"channel", "item", "media:content", "media:thumbnail"};
 
 	/**
 	 * @return whether tag is a valid content tag
@@ -155,7 +155,7 @@ public class Reader {
 			}
 			else if (isEntityTag(qName)) {
 				if (qName.equals("item")) {
-					Item item = new Item();
+					Item item = new Item(attributes);
 					_entityStack.add(item);
 					_feed.addItem(item);
 				}
@@ -166,6 +166,18 @@ public class Reader {
 						((Item)lastEntity).setMediaContent(mediaContent);
 					}
 					_entityStack.add(mediaContent);
+				} 
+				else if (qName.equals("media:thumbnail")) {
+					MediaThumbnail mediaThumbnail = new MediaThumbnail(attributes);
+					FeedEntity lastEntity = _entityStack.lastElement();
+					if (lastEntity.getClass() == Item.class) {
+						Item item = (Item)lastEntity;
+						MediaThumbnail existingMt = item.getMediaThumbnail();
+						if (existingMt == null) {
+							item.setMediaThumbnail(mediaThumbnail);
+						}
+					}
+					_entityStack.add(mediaThumbnail);
 				} 
 				else if (qName.equals("channel")) {
 					// this is just the start of the feed

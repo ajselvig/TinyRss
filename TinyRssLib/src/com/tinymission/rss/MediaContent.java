@@ -20,11 +20,7 @@ public class MediaContent extends FeedEntity {
 	private String sampligRate;
 	
 	public MediaContent(Attributes attributes) {
-		for (int i=0; i < attributes.getLength(); i++) {
-			String name = attributes.getLocalName(i);
-			String value = attributes.getValue(i);
-			setProperty(name, value);
-		}
+		super(attributes);
 	}
 	
 	/**
