@@ -182,7 +182,7 @@ public abstract class FeedActivity extends ListActivity {
 		public int getCount() {
 			if (_feed == null)
 				return 0;
-			if (getMaxItems() > -1)
+			if (getMaxItems() > -1 && getMaxItems() < _feed.getItemCount())
 				return getMaxItems();
 			return _feed.getItemCount();
 		}
@@ -190,6 +190,8 @@ public abstract class FeedActivity extends ListActivity {
 		@Override
 		public Object getItem(int position) {
 			if (_feed == null)
+				return null;
+			if (position >= _feed.getItemCount())
 				return null;
 			return _feed.getItem(position);
 		}
@@ -213,6 +215,8 @@ public abstract class FeedActivity extends ListActivity {
 			}
 			
 			Item item = (Item)getItem(position);
+			if (item == null)
+				return view;
 			
 			TextView titleView = (TextView)view.findViewById(R.id.feed_item_title);
 			if (titleView != null)
