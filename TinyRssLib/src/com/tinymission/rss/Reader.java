@@ -1,23 +1,21 @@
 package com.tinymission.rss;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Stack;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
+import android.util.Log;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
-import android.util.Log;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Stack;
 
 /**
  * Reads an RSS feed and creates and RssFeed object.
@@ -29,7 +27,7 @@ public class Reader {
 	/** The allowed tags to parse content from (everything else gets lumped into its parent content, which allows for embedding html content.
 	 * 
 	 */
-	public final static String[] CONTENT_TAGS = {"title", "link", "description", "language", "pubDate", "lastBuildDate", "docs", "generator", "managingEditor", "webMaster", "guid"};
+	public final static String[] CONTENT_TAGS = {"title", "link", "description", "language", "pubDate", "lastBuildDate", "docs", "generator", "managingEditor", "webMaster", "guid", "author"};
 	
 	/** The tags that should be parsed into separate entities, not just properties of existing entities.
 	 * 

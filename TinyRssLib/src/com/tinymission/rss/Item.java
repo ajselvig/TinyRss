@@ -37,7 +37,11 @@ public class Item extends FeedEntity {
 		return _title;
 	}
 
-	/**
+    public String getCleanTitle() {
+        return Jsoup.parse(_title).text();
+    }
+
+    /**
 	 * @param The title of the item to set
 	 */
 	public void setTitle(String title) {
