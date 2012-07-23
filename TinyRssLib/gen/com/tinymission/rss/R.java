@@ -21,9 +21,10 @@ public final class R {
         public static int toolbar_logo=0x7f020002;
     }
     public static final class id {
-        public static int feed_item_description=0x7f060003;
+        public static int feed_item_author=0x7f060002;
+        public static int feed_item_description=0x7f060004;
         public static int feed_item_image=0x7f060000;
-        public static int feed_item_pubDate=0x7f060002;
+        public static int feed_item_pubDate=0x7f060003;
         public static int feed_item_title=0x7f060001;
     }
     public static final class layout {
@@ -31,9 +32,10 @@ public final class R {
         public static int feed_list_item=0x7f030001;
     }
     public static final class style {
-        public static int FeedItemDate=0x7f050003;
-        public static int FeedItemDescription=0x7f050004;
-        public static int FeedItemImage=0x7f050005;
+        public static int FeedItemAuthor=0x7f050003;
+        public static int FeedItemDate=0x7f050004;
+        public static int FeedItemDescription=0x7f050005;
+        public static int FeedItemImage=0x7f050006;
         public static int FeedItemTitle=0x7f050002;
         /**  Feed List 
          */

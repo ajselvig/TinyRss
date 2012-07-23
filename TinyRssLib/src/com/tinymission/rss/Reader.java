@@ -27,7 +27,7 @@ public class Reader {
 	/** The allowed tags to parse content from (everything else gets lumped into its parent content, which allows for embedding html content.
 	 * 
 	 */
-	public final static String[] CONTENT_TAGS = {"title", "link", "description", "language", "pubDate", "lastBuildDate", "docs", "generator", "managingEditor", "webMaster", "guid", "author"};
+	public final static String[] CONTENT_TAGS = {"title", "link", "description", "language", "pubDate", "lastBuildDate", "docs", "generator", "managingEditor", "webMaster", "guid", "author", "category"};
 	
 	/** The tags that should be parsed into separate entities, not just properties of existing entities.
 	 * 
@@ -39,7 +39,7 @@ public class Reader {
 	 */
 	public static boolean isContentTag(String tag) {
 		for (String t: CONTENT_TAGS) {
-			if (t.equals(tag)) {
+			if (t.equalsIgnoreCase(tag)) {
 				return true;
 			}
 		}

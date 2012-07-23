@@ -26,6 +26,7 @@ public class Item extends FeedEntity {
 	private String _author;
 	private String _comments;
 	private String _source;
+    private String _category;
 	
 	private MediaContent _mediaContent;
 	private MediaThumbnail _mediaThumbnail;
@@ -75,8 +76,13 @@ public class Item extends FeedEntity {
 	 * @return the description without any html tags.
 	 */
 	public String getCleanDescription() {
-		return Jsoup.parse(_description).text();
-	}
+        try {
+            return Jsoup.parse(_description).text();
+        }
+        catch (Exception ex) {
+            return null;
+        }
+    }
 
 	/**
 	 * @param The item synopsis to set
@@ -134,7 +140,16 @@ public class Item extends FeedEntity {
 		return _author;
 	}
 
-	/**
+    public String getCleanAuthor() {
+        try {
+            return Jsoup.parse(_author).text();
+        }
+        catch (Exception ex) {
+             return null;
+        }
+    }
+
+    /**
 	 * @param Email address of the author of the item to set
 	 */
 	public void setAuthor(String author) {
@@ -155,9 +170,20 @@ public class Item extends FeedEntity {
 	public void setComments(String comments) {
 		this._comments = comments;
 	}
-	
 
-	/**
+    public String getCategory() {
+        return _category;
+    }
+
+    /**
+     * @param Category of the item to set
+     */
+    public void setCategory(String _category) {
+        this._category = _category;
+    }
+
+
+    /**
 	 * @return The RSS channel that the item came from
 	 */
 	public String getSource() {

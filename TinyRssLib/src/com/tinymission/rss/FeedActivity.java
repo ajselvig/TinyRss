@@ -1,7 +1,5 @@
 package com.tinymission.rss;
 
-import java.text.SimpleDateFormat;
-
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -12,11 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
+
+import java.text.SimpleDateFormat;
 
 /** Base class for activities that show an RSS feed.
  *
@@ -61,8 +57,16 @@ public abstract class FeedActivity extends ListActivity {
 	public boolean isDateVisible() {
 		return false;
 	}
-	
-	/** Subclasses can override to specify where to obtain the feed item images.
+
+    /** Subclasses can override to show the title, author, or both
+     *
+     * @return 0 to show title only, 1 to show author only, 2 to show both (default is 0)
+     */
+    public int showTitleAuthorOrBoth() {
+        return 0;
+    }
+
+    /** Subclasses can override to specify where to obtain the feed item images.
 	 * @return a value specifying the source of the feed item images (default Media)
 	 */
 	public FeedImageSource getImageSource() {
@@ -138,7 +142,7 @@ public abstract class FeedActivity extends ListActivity {
 		super.onStart();
 	}
     
-	/** Class for fecthing the feed content in the background.
+	/** Class for fetching the feed content in the background.
 	 * 
 	 */
 	public class FeedFetcher extends AsyncTask<String, Integer, Integer> {
@@ -173,6 +177,10 @@ public abstract class FeedActivity extends ListActivity {
 	public class FeedAdapter extends BaseAdapter {
 	
 		private Feed _feed;
+
+        public FeedAdapter() {
+
+        }
 		
 		public FeedAdapter(Feed feed) {
 			_feed = feed;
@@ -219,10 +227,21 @@ public abstract class FeedActivity extends ListActivity {
 				return view;
 			
 			TextView titleView = (TextView)view.findViewById(R.id.feed_item_title);
-			if (titleView != null)
-				titleView.setText(item.getTitle());
-			
-			TextView descView = (TextView)view.findViewById(R.id.feed_item_description);
+			if (titleView != null && showTitleAuthorOrBoth() != 1)
+				titleView.setText(item.getCleanTitle());
+            else
+                titleView.setVisibility(View.GONE);
+
+            TextView authorView = (TextView)view.findViewById(R.id.feed_item_author);
+            if (authorView != null && showTitleAuthorOrBoth() != 0)  {
+                String txt =  item.getCleanAuthor();
+                if(txt != null) authorView.setText(txt);
+                else authorView.setVisibility(View.GONE);
+            }
+            else
+                authorView.setVisibility(View.GONE);
+
+            TextView descView = (TextView)view.findViewById(R.id.feed_item_description);
 			if (descView != null)
 				descView.setText(item.getCleanDescription());
 			

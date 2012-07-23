@@ -13,8 +13,13 @@
         android:layout_toRightOf="@id/feed_item_image"
         style="@style/FeedItemTitle"/>
 
+    <TextView android:id="@+id/feed_item_author"
+              android:layout_below="@id/feed_item_title"
+              android:layout_toRightOf="@id/feed_item_image"
+              style="@style/FeedItemAuthor"/>
+
     <TextView android:id="@+id/feed_item_pubDate"
-        android:layout_below="@id/feed_item_title"
+        android:layout_below="@id/feed_item_author"
         android:layout_toRightOf="@id/feed_item_image"
         style="@style/FeedItemDate"
         android:visibility="gone"/>
