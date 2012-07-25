@@ -101,7 +101,10 @@ public abstract class FeedActivity extends ListActivity {
 		}
 	}
 	
-	
+	public void customizeItemView(Item item, View v) {
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -283,7 +286,7 @@ public abstract class FeedActivity extends ListActivity {
 					imageView.setVisibility(View.GONE);
 				}
 			}
-			
+			customizeItemView(item, view);
 			return view;
 		}
 	
